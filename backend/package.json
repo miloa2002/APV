@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "APV como proyecto final te la técnica ",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miloa2002/APV.git"
+  },
+  "keywords": [
+    "APV",
+    "Proyecto",
+    "final",
+    "Nodejs",
+    "Reactjs"
+  ],
+  "author": "Camilo Agudelo Tapias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miloa2002/APV/issues"
+  },
+  "homepage": "https://github.com/miloa2002/APV#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
