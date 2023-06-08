@@ -3,6 +3,6 @@ import { registrar } from "../controllers/registrarAdmin.js";
 
 const router = express.Router();
 
-router.get("/", registrar);
+router.post("/", registrar);
 
-export default router;
+export default router;  

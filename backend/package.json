@@ -25,7 +25,9 @@
   },
   "homepage": "https://github.com/miloa2002/APV#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "moongose": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

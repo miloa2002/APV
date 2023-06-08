@@ -1,6 +1,6 @@
 
 const registrar = (req, res) => {
-    res.send("obteniendo administradores");
+    res.send("creando administrador");
 };
 
 export {registrar};
