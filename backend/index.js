@@ -1,5 +1,5 @@
 import express from "express";
-import adminRoutes from "./routes/adminRoutes.js"
+import veterinariosRoutes from "./routes/veterinariosRoutes.js"
 import conectarDB from "./config/db.js";
 import dotenv from "dotenv";
 
@@ -11,7 +11,7 @@ dotenv.config();
 conectarDB();
 
 //routing
-app.use("/api/admin", adminRoutes);
+app.use("/api/veterinarios", veterinariosRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, ()=> {
