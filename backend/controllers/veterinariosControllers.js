@@ -1,4 +1,6 @@
 import User from "../models/Veterinario.js";
+import generarId from "../helpers/generarId.js";
+import generarJWT from "../helpers/generarJWT.js";
 
 const registrar = async(req, res) => {
 
@@ -12,6 +14,7 @@ const registrar = async(req, res) => {
 
     try {
         const usuario = new User(req.body);
+        usuario.token = generarId();
         const usuarioGuardado = await usuario.save();
        res.json(usuarioGuardado);
     } catch (error) {
@@ -19,4 +22,40 @@ const registrar = async(req, res) => {
     }
 };
 
-export {registrar};
+const autenticar = async (req, res) => {
+    const { email, password } = req.body;
+
+    //existe usuario?
+    const usuario = await User.findOne({email});
+    if(!usuario){
+        const error = new Error("El usuario no existe");
+        return res.status(404).json({msg: error.message});
+    }
+
+    //usuario confirmado
+    if (!usuario.confirmado) {
+      const error = new Error("Tu cuenta no ha sido confirmada");
+      return res.status(403).json({ msg: error.message });
+    }
+
+    //comprobar password
+    if(await usuario.comprobarPassword(password)){
+        res.json({
+            _id: usuario._id,
+            nombre: usuario.nombre,
+            email: usuario.email,
+            telefono: usuario.telefono,
+            token: generarJWT(usuario._id),
+        })
+    }else{
+        const error = new Error("El password es incorrecto");
+        return res.status(403).json({ msg: error.message });
+    }
+
+};
+
+const confirmar = async (req, res) => {
+    console.log(req.params.token);
+}
+
+export { registrar, autenticar, confirmar };
