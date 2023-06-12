@@ -7,6 +7,7 @@ import {
   comprobarToken,
   nuevoPassword,
   perfil,
+  cambiarEstado,
 } from "../controllers/veterinariosControllers.js";
 
 import checkAuth from "../middleware/checkAuth.js";
@@ -21,6 +22,7 @@ router.get("/olvide-password/:token", comprobarToken);
 router.route("/olvide-password/:token")
     .get(comprobarToken)
     .post(nuevoPassword);
+router.put("/cambiar-admin", cambiarEstado);
 
 router.get('/perfil', checkAuth, perfil);
 

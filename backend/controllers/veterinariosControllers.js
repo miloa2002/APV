@@ -15,8 +15,8 @@ const registrar = async(req, res) => {
     try {
         const usuario = new User(req.body);
         usuario.token = generarId();
-        const usuarioGuardado = await usuario.save();
-       res.json(usuarioGuardado);
+        await usuario.save();
+       res.json({msg: "Usuario creado correctamente, Revisa tu email para confirmar tu cuenta"});
     } catch (error) {
         console.log(error);
     }
@@ -124,6 +124,19 @@ const nuevoPassword = async(req, res) => {
     }
 }
 
+const cambiarEstado = async(req, res) => {
+    try {
+        const userId = req.usuario._id;
+        const {esAdmin} = req.body;
+
+        await User.findByIdAndUpdate(userId, {esAdmin});
+
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 const perfil = async(req, res) => {
     const { usuario } = req;
     res.json(usuario)
@@ -136,5 +149,6 @@ export {
   olvidePassword,
   comprobarToken,
   nuevoPassword,
+  cambiarEstado,
   perfil,
 };

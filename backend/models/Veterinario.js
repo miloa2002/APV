@@ -19,15 +19,14 @@ const userSchema = new mongoose.Schema(
       trim: true,
       unique: true,
     },
-    telefono: {
-      type: String,
-      default: null,
-      trim: true,
-    },
     token: {
       type: String,
     },
     confirmado: {
+      type: Boolean,
+      default: false,
+    },
+    esAdmin: {
       type: Boolean,
       default: false,
     },
