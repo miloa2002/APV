@@ -1,4 +1,4 @@
-import mongoose from "moongose";
+import mongoose from "mongoose";
 
 const pacientesSchema = mongoose.Schema(
   {
@@ -17,12 +17,12 @@ const pacientesSchema = mongoose.Schema(
       default: Date.now(),
     },
     veterinario: {
-      type: mongoose.Schema.types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    clientes: [
+    propietarios: [
       {
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],
