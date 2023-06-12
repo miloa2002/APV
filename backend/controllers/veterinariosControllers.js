@@ -1,6 +1,7 @@
 import User from "../models/Veterinario.js";
 import generarId from "../helpers/generarId.js";
 import generarJWT from "../helpers/generarJWT.js";
+import { emailRegistro } from "../helpers/email.js";
 
 const registrar = async(req, res) => {
 
@@ -16,6 +17,14 @@ const registrar = async(req, res) => {
         const usuario = new User(req.body);
         usuario.token = generarId();
         await usuario.save();
+
+        //enviar email de confirmación
+        emailRegistro({
+            email: usuario.email,
+            nombre: usuario.nombre,
+            token: usuario.token
+        })
+
        res.json({msg: "Usuario creado correctamente, Revisa tu email para confirmar tu cuenta"});
     } catch (error) {
         console.log(error);
