@@ -28,3 +28,33 @@ export const emailRegistro = async(datos) => {
         `
     })
 };
+
+
+export const emailOlvidePassword = async (datos) => {
+  const { email, nombre, token } = datos;
+
+  //TODO: Mover hacia variables de entorno
+  const transport = nodemailer.createTransport({
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "6b8784cf81e7d1",
+      pass: "c3bc70918c7727",
+    },
+  });
+
+  const info = await transport.sendMail({
+    from: '"APV - Administrador de pacientes de veterinaria" <cuentas@APV.com>',
+    to: email,
+    subject: "APV - Reestablece tu password",
+    text: "Comprueba tu cuenta en APV",
+    html: `
+            <p>Hola: ${nombre} Cha solicitado reestablecer tu password</p>
+            <p>Sigue el siguiente enlace para generar el nuevo password:</p>
+
+            <a href="${process.env.FRONTEND_URL}/olvide-password/${token}">Reestablecer passwrod</a>
+
+            <p>Si tu no solicitaste este email, ignora el mensaje</p>
+        `,
+  });
+};
