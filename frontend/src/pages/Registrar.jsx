@@ -160,7 +160,7 @@ const Registrar = () => {
 
         <Link
           className="block text-center my-5 text-slate-500 uppercase text-sm"
-          to="olvide-password"
+          to="/olvide-password"
         >Olvidé mi password</Link>
       </nav>
     </>

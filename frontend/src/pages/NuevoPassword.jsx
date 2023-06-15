@@ -41,7 +41,7 @@ const NuevoPassword = () => {
     }
 
     try {
-      const url = `http://localhost:4000/api/veterinarios/olvide-password/${token}`
+      const url = `/veterinarios/olvide-password/${token}`
 
       const { data } = await clienteAxios.post(url, {
         password
