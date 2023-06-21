@@ -10,7 +10,7 @@ const FormularioPaciente = () => {
 
   const { mostrarAlerta, alerta, submitPaciente } = usePacientes()
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
     if([nombre, sintomas, fechaIngreso].includes("")){
@@ -23,7 +23,11 @@ const FormularioPaciente = () => {
     }
 
     //datos al provider
-    submitPaciente({nombre, sintomas, fechaIngreso})
+    await submitPaciente({nombre, sintomas, fechaIngreso})
+
+    setNombre("")
+    setSintomas("")
+    setFechaIngreso("")
   }
 
   const { msg } = alerta
