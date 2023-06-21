@@ -1,4 +1,6 @@
 import { useState } from "react"
+import usePacientes from "../hooks/usePacientes"
+import Alerta from "./Alerta"
 
 const FormularioPaciente = () => {
 
@@ -6,10 +8,34 @@ const FormularioPaciente = () => {
   const [sintomas, setSintomas] = useState("")
   const [fechaIngreso, setFechaIngreso] = useState("")
 
+  const { mostrarAlerta, alerta, submitPaciente } = usePacientes()
+
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    if([nombre, sintomas, fechaIngreso].includes("")){
+      mostrarAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true
+      })
+
+      return
+    }
+
+    //datos al provider
+    submitPaciente({nombre, sintomas, fechaIngreso})
+  }
+
+  const { msg } = alerta
+
   return (
     <form
       className="bg-white py-10 px-5 md:w-1/2 rounded-lg shadow"
+      onSubmit={handleSubmit}
     >
+
+      {msg && <Alerta alerta={alerta} />}
+
       <div className="mb-5">
         <label 
           htmlFor="nombre"
