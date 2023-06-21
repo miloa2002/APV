@@ -1,3 +1,4 @@
+import PreviewPaciente from "../components/PreviewPaciente"
 import usePacientes from "../hooks/usePacientes"
 
 const Pacientes = () => {
@@ -9,7 +10,16 @@ const Pacientes = () => {
       <h1 className="text-4xl font-black">Pacientes</h1>
 
       <div className="bg-white shadow mt-10 rounded-lg ">
-        {pacientes.length ? <p>Si hay proyectos</p> : <p>No hay proyectos aún</p>}
+        {pacientes.length ? 
+
+          pacientes.map(paciente => (
+            <PreviewPaciente 
+              key={paciente._id}
+              paciente={paciente}
+            />
+          ))
+
+          : <p className=" text-center text-gray-600 uppercase p-5">No hay proyectos aún</p>}
       </div>
     </>
   )

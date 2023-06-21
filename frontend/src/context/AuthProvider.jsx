@@ -10,7 +10,7 @@ const AuthProvider = ({children}) => {
     const [auth, setAuth] = useState({})
     const [cargando, setCargando] = useState(true)
 
-    const navigate = useNavigate()
+    // // const navigate = useNavigate()
 
     useEffect(()=> {
         const autenticarUsuario = async () => {
@@ -31,7 +31,7 @@ const AuthProvider = ({children}) => {
             try {
                 const { data } = await clienteAxios('veterinarios/perfil', config)
                 setAuth(data)
-                navigate('/pacientes')
+                // navigate('/pacientes')
             } catch (error) {
                 setAuth({})
             }finally{

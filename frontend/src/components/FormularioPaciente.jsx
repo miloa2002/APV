@@ -1,14 +1,28 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 import usePacientes from "../hooks/usePacientes"
 import Alerta from "./Alerta"
 
 const FormularioPaciente = () => {
 
+  const [id, setId] = useState(null)
   const [nombre, setNombre] = useState("")
   const [sintomas, setSintomas] = useState("")
   const [fechaIngreso, setFechaIngreso] = useState("")
 
-  const { mostrarAlerta, alerta, submitPaciente } = usePacientes()
+  const params = useParams()
+
+  const { mostrarAlerta, alerta, submitPaciente, paciente } = usePacientes()
+
+  useEffect(()=>{
+    if(params.id){
+      setId(paciente._id)
+      setNombre(paciente.nombre)
+      setSintomas(paciente.sintomas)
+      setFechaIngreso(paciente.fechaIngreso?.split('T')[0])
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[params])
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -89,7 +103,7 @@ const FormularioPaciente = () => {
 
       <input 
         type="submit" 
-        value="Crear paciente"
+        value={id ? "Actualizar paciente" : "Crear paciente"}
         className="bg-sky-600 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors" 
       />
 

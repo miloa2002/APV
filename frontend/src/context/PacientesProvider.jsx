@@ -8,7 +8,9 @@ const PacientesContext = createContext()
 const PacientesProvider = ({children}) => {
 
     const [pacientes, setPacientes] = useState([])
-    const [alerta, setAlerta] = useState([])
+    const [alerta, setAlerta] = useState({})
+    const [paciente, setPaciente] = useState({})
+    const [cargando, setCargando] = useState(false)
 
     const navigate = useNavigate()
 
@@ -56,7 +58,7 @@ const PacientesProvider = ({children}) => {
             }
 
             const {data} = await clienteAxios.post('/pacientes', paciente, config)
-            console.log(data);
+            setPacientes([...pacientes, data])
 
             setAlerta({
                 msg: 'Paciente creado correctamente',
@@ -73,13 +75,38 @@ const PacientesProvider = ({children}) => {
         }
     }
 
+    const obtenerPaciente = async id => {
+        setCargando(true)
+        try {
+            const token = localStorage.getItem('token')
+            if (!token) return
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const {data} = await clienteAxios(`/pacientes/${id}`, config)
+            setPaciente(data)
+        } catch (error) {
+            console.log(error);
+        }finally{
+            setCargando(false)
+        }
+    }
+
     return (
         <PacientesContext.Provider
             value={{
                 pacientes,
                 mostrarAlerta,
                 alerta,
-                submitPaciente
+                submitPaciente,
+                obtenerPaciente,
+                paciente,
+                cargando
             }}
         >
             {children}
