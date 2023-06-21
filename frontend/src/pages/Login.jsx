@@ -2,12 +2,15 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Alerta from "../components/Alerta"
 import clienteAxios from "../config/clienteAxios"
+import useAuth from "../hooks/UseAuth"
 
 const Login = () => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [alerta, setAlerta] = useState({})
+
+  const { setAuth } = useAuth();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -25,9 +28,10 @@ const Login = () => {
         email, password
       })
       setAlerta({
-        
+
       })
       localStorage.setItem('token', data.token)
+      setAuth(data)
       
     } catch (error) {
       setAlerta({

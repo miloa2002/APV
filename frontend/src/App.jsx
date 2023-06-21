@@ -8,6 +8,8 @@ import NuevoPassword from "./pages/NuevoPassword";
 import ConfirmarCuenta from "./pages/ConfirmarCuenta";
 
 import { AuthProvider } from "./context/AuthProvider";
+import RutaProtegida from "./layouts/RutaProtegida";
+import Pacientes from "./pages/Pacientes";
 
 function App() {
   return (
@@ -20,6 +22,10 @@ function App() {
             <Route path="olvide-password" element={<OlvidePassword />} />
             <Route path="olvide-password/:token" element={<NuevoPassword />} />
             <Route path="confirmar/:id" element={<ConfirmarCuenta />} />
+          </Route>
+
+          <Route path="/pacientes" element={<RutaProtegida />}>
+            <Route index element={<Pacientes />} />
           </Route>
         </Routes>
       </AuthProvider>
