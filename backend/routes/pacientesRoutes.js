@@ -5,6 +5,7 @@ import {
   obtenerPaciente,
   editarPaciente,
   eliminarPaciente,
+  buscarPropietario,
   agregarPropietario,
   eliminarPropietario,
 } from "../controllers/pacienteController.js";
@@ -21,7 +22,9 @@ router.route('/:id')
     .put(checkAuth, editarPaciente)
     .delete(checkAuth, eliminarPaciente)
 
-router.post("/agregar-cliente/:id", checkAuth, agregarPropietario);
-router.post("/eliminar-cliente/:id", checkAuth, eliminarPropietario);
+
+router.post("/clientes", checkAuth, buscarPropietario)
+router.post("/clientes/:id", checkAuth, agregarPropietario);
+router.delete("/clientes/:id", checkAuth, eliminarPropietario);
 
 export default router;

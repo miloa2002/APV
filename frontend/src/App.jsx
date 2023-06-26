@@ -15,6 +15,7 @@ import { AuthProvider } from "./context/AuthProvider";
 import { PacientesProvider } from "./context/PacientesProvider";
 import Paciente from "./pages/Paciente";
 import EditarPaciente from "./pages/EditarPaciente";
+import NuevoCliente from "./pages/NuevoCliente";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/pacientes" element={<RutaProtegida />}>
               <Route index element={<Pacientes />} />
               <Route path="crear-paciente" element={<NuevoPaciente />} />
+              <Route path="nuevo-cliente/:id" element={<NuevoCliente />} />
               <Route path=":id" element={<Paciente />} />
               <Route path="editar/:id" element={<EditarPaciente />} />
             </Route>

@@ -37,8 +37,9 @@ const FormularioPaciente = () => {
     }
 
     //datos al provider
-    await submitPaciente({nombre, sintomas, fechaIngreso})
+    await submitPaciente({id, nombre, sintomas, fechaIngreso})
 
+    setId(null)
     setNombre("")
     setSintomas("")
     setFechaIngreso("")
